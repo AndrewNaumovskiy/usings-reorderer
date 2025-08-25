@@ -39,9 +39,10 @@ fn main() {
             .push(using);
     }
 
-    // sort by grouped_usings by key length
+    // sort grouped_usings by the minimum length of their values
     let mut sorted_grouped_usings: Vec<_> = grouped_usings.into_iter().collect();
-    sorted_grouped_usings.sort_by_key(|(key, _)| key.len());
+    sorted_grouped_usings
+        .sort_by_key(|(_, lines)| lines.iter().map(|line| line.len()).min().unwrap_or(0));
 
     let mut final_sorted_usings: Vec<String> = vec![];
 
